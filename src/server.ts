@@ -1,12 +1,9 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import {connect} from 'mongoose'
-import {message} from './message'
+import {messages} from './messages'
 
-connect(
-  // Do not commit prod credentials to git tho
-  'mongodb+srv://NToss:aKmgd43Sf1@cluster0.bkca8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-)
+connect('...secrets...')
   .then(() => console.log('Successfully connected to the database'))
   .catch(err => console.log('Could not connect to the database. Error...', err))
 
@@ -14,7 +11,7 @@ const app = express()
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.get('/', (req, res) => res.json({message: 'Server is running :D'}))
-app.use('/message', message)
+app.use('/messages', messages)
 
 // Centralize error handling. Each route should call .catch(next) tho in order for it to work
 // Will be much simpler in express 5.0.0, but now you need to call next() on an exception

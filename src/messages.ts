@@ -9,7 +9,7 @@ const Message = model(
 )
 
 // Simple CRUD route
-export const message = Router()
+export const messages = Router()
 
 // This wrap will return 404 on an empty result
 // Or will call next() for exception
@@ -24,27 +24,27 @@ const wrap = handler => {
   }
 }
 
-message.post(
+messages.post(
   '/',
   wrap(req => new Message(req.body).save()),
 )
 
-message.get(
+messages.get(
   '/',
   wrap(() => Message.find()),
 )
 
-message.get(
+messages.get(
   '/:id',
   wrap(req => Message.findById(req.params.id)),
 )
 
-message.put(
+messages.put(
   '/:id',
   wrap(req => Message.findByIdAndUpdate(req.params.id, req.body)),
 )
 
-message.delete(
+messages.delete(
   '/:id',
   wrap(req => Message.findByIdAndDelete(req.params.id)),
 )
