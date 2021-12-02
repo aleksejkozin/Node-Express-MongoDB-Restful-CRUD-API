@@ -3,7 +3,10 @@ import bodyParser from 'body-parser'
 import {connect} from 'mongoose'
 import {messages} from './messages'
 
-connect('...secrets...')
+connect(
+  // Do not commit prod credentials to git tho
+  'mongodb+srv://NToss:aKmgd43Sf1@cluster0.bkca8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+)
   .then(() => console.log('Successfully connected to the database'))
   .catch(err => console.log('Could not connect to the database. Error...', err))
 
